@@ -1,0 +1,128 @@
+[
+  {
+    "pid": 0,
+    "lpSymbol": "WAYA",
+    "lpAddress": "0xB4Ebcc066959C09206e596B7E810484eb55DD80C",
+    "token": {
+      "address": "0x2b82d6d89F5786C6A0fFab86b5F7F0532d5F19e4",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WETH",
+      "name": "Wrapped Ether",
+      "projectLink": "https://weth.io"
+    }
+  },
+  {
+    "pid": 1,
+    "lpSymbol": "WAYA/ETH LP",
+    "lpAddress": "0x2A051fd7c6a100bC7690B5064923f6Bc43d3574e",
+    "token": {
+      "address": "0x2b82d6d89F5786C6A0fFab86b5F7F0532d5F19e4",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WETH",
+      "name": "Wrapped Ether",
+      "projectLink": "https://weth.io"
+    }
+  },
+  {
+    "pid": 2,
+    "lpSymbol": "BUSD/ETH LP",
+    "lpAddress": "0xc0FB246ae3d56351aDc2bDB196c623577D90cfB5",
+    "token": {
+      "address": "0xb809b9B2dc5e93CB863176Ea2D565425B03c0540",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "BUSD",
+      "name": "Binance USD",
+      "projectLink": "https://www.paxos.com/busd/"
+    },
+    "quoteToken": {
+      "address": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WETH",
+      "name": "Wrapped Ether",
+      "projectLink": "https://weth.io"
+    }
+  },
+  {
+    "pid": 3,
+    "lpSymbol": "WAYA/BUSD LP",
+    "lpAddress": "0x57b4905662BdB31d5F42357Bb4226878f8469076",
+    "token": {
+      "address": "0x2b82d6d89F5786C6A0fFab86b5F7F0532d5F19e4",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0xb809b9B2dc5e93CB863176Ea2D565425B03c0540",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "BUSD",
+      "name": "Binance USD",
+      "projectLink": "https://www.paxos.com/busd/"
+    }
+  },
+  {
+    "pid": 4,
+    "lpSymbol": "PLEX-F/ETH LP",
+    "lpAddress": "0xaD4761f26AbA1870Eb9081CfcAA0a9C07bbB3a12",
+    "token": {
+      "address": "0xE95AF82Bc998D2f05aD76a2F1B404756DCfc0b8a",
+      "chainId": 5,
+      "decimals": 9,
+      "symbol": "PLEX-F",
+      "name": "Symplexia Finance",
+      "projectLink": "https://finance.symplexia.com/"
+    },
+    "quoteToken": {
+      "address": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "WETH",
+      "name": "Wrapped Ether",
+      "projectLink": "https://weth.io"
+    }
+  },
+  {
+    "pid": 5,
+    "lpSymbol": "PLEX-F/BUSD LP",
+    "lpAddress": "0x4fCfa60A9BF43a6F9aD614A0dBa4586b19de2483",
+    "token": {
+      "address": "0xE95AF82Bc998D2f05aD76a2F1B404756DCfc0b8a",
+      "chainId": 5,
+      "decimals": 9,
+      "symbol": "PLEX-F",
+      "name": "Symplexia Finance",
+      "projectLink": "https://finance.symplexia.com/"
+    },
+    "quoteToken": {
+      "address": "0xb809b9B2dc5e93CB863176Ea2D565425B03c0540",
+      "chainId": 5,
+      "decimals": 18,
+      "symbol": "BUSD",
+      "name": "Binance USD",
+      "projectLink": "https://www.paxos.com/busd/"
+    }
+  }
+]
