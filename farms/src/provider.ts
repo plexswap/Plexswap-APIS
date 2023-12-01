@@ -27,7 +27,7 @@ export const goerliProvider = new StaticJsonRpcProvider(
 export const plexchainProvider = new StaticJsonRpcProvider(
   {
     url: 'https://plex-rpc.plexfinance.us',
-    skipFetchSetup: false,
+    skipFetchSetup: true,
   },
   1149,
 )
