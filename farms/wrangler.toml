@@ -11,16 +11,6 @@ KV_CACHE = false
 [triggers]
 crons = []
 
-[env.staging]
-kv_namespaces = [
-  {binding = "FARMS", id = "ef1dfed53811430c906cf921f3269f87"},
-]
-name = "farms-staging"
-[env.staging.vars]
-KV_CACHE = true
-[env.staging.triggers]
-crons = ["0 0 * * *", "*/2 * * * *"]
-
 [env.production]
 kv_namespaces = [
   {binding = "FARMS", id = "78d321b2cad34d669e54996ee221bbd9"},

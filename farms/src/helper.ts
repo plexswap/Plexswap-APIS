@@ -2,7 +2,7 @@ import { Obj } from 'itty-router'
 import { error } from 'itty-router-extras'
 import { createFarmFetcher } from '@plexswap/farms'
 import { createMulticall } from '@plexswap/multicall'
-import { bscProvider, bscTestnetProvider, goerliProvider } from './provider'
+import { bscProvider, bscTestnetProvider, goerliProvider, plexchainProvider } from './provider'
 
 const multicall = createMulticall(({ chainId }) => {
   switch (chainId) {
@@ -12,8 +12,10 @@ const multicall = createMulticall(({ chainId }) => {
       return bscTestnetProvider
     case 5:
       return goerliProvider
+    case 1149:
+      return plexchainProvider  
     default:
-      return null
+      return plexchainProvider
   }
 })
 

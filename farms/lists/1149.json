@@ -1,0 +1,128 @@
+[
+  {
+    "pid": 0,
+    "lpSymbol": "WAYA",
+    "lpAddress": "0x7589CF3115E060673FD0109fA6891464E13947A1",
+    "token": {
+      "address": "0x7589CF3115E060673FD0109fA6891464E13947A1",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Farm Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0x50245424Afc53E67Ca1AAD2C90401568C0eFf53A",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WPLEX",
+      "name": "Wrapped Plex",
+      "projectLink": "https://plexfinance.us"
+    }
+  },
+  {
+    "pid": 1,
+    "lpSymbol": "WAYA/PLEX LP",
+    "lpAddress": "0x1571238fc03aa157e6cc77145709b78b35b84108",
+    "token": {
+      "address": "0x7589CF3115E060673FD0109fA6891464E13947A1",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Farm Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0x50245424Afc53E67Ca1AAD2C90401568C0eFf53A",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WPLEX",
+      "name": "Wrapped Plex",
+      "projectLink": "https://plexfinance.us"
+    }
+  },
+  {
+    "pid": 2,
+    "lpSymbol": "PLEX-F/PLEX LP",
+    "lpAddress": "0xc6de9de7de07eb5e7569e67ad76dc0680c7b98ec",
+    "token": {
+      "address": "0xD0B07197d86434635fe30D69604751F3651c19a6",
+      "chainId": 1149,
+      "decimals": 9,
+      "symbol": "PLEX-F",
+      "name": "Symplexia Finance Token",
+      "projectLink": "https://plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0x50245424Afc53E67Ca1AAD2C90401568C0eFf53A",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WPLEX",
+      "name": "Wrapped Plex",
+      "projectLink": "https://plexfinance.us"
+    }
+  },
+  {
+    "pid": 3,
+    "lpSymbol": "PLEX/USDP LP",
+    "lpAddress": "0x8a233567a582de5110f03bdfe531fb6d1cb02969",
+    "token": {
+      "address": "0x50245424Afc53E67Ca1AAD2C90401568C0eFf53A",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WPLEX",
+      "name": "Wrapped Plex",
+      "projectLink": "https://plexfinance.us"
+    },
+    "quoteToken": {
+      "address": "0x69D1D347088e8916aC107b6679927C4EC5faB4a0",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "USDP",
+      "name": "Symplexia USD Coin",
+      "projectLink": "https://plexfinance.us/"
+    }
+  },
+  {
+    "pid": 4,
+    "lpSymbol": "WAYA/USDP LP",
+    "lpAddress": "0xe5c042fc3de449e3fc70799e88ff034d539abfc4",
+    "token": {
+      "address": "0x7589CF3115E060673FD0109fA6891464E13947A1",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "WAYA",
+      "name": "PlexSwap Farm Token",
+      "projectLink": "https://swap.plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0x69D1D347088e8916aC107b6679927C4EC5faB4a0",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "USDP",
+      "name": "Symplexia USD Coin",
+      "projectLink": "https://plexfinance.us/"
+    }
+  },
+  {
+    "pid": 5,
+    "lpSymbol": "PLEX-F/USDP LP",
+    "lpAddress": "0xc27987dab15c3c1be2c2bb052c5ce79dad5c51fc",
+    "token": {
+      "address": "0xD0B07197d86434635fe30D69604751F3651c19a6",
+      "chainId": 1149,
+      "decimals": 9,
+      "symbol": "PLEX-F",
+      "name": "Symplexia Finance Token",
+      "projectLink": "https://plexfinance.us/"
+    },
+    "quoteToken": {
+      "address": "0x69D1D347088e8916aC107b6679927C4EC5faB4a0",
+      "chainId": 1149,
+      "decimals": 18,
+      "symbol": "USDP",
+      "name": "Symplexia USD Coin",
+      "projectLink": "https://plexfinance.us/"
+    }
+  }
+]

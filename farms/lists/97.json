@@ -8,7 +8,7 @@
       "chainId": 97,
       "decimals": 18,
       "symbol": "WAYA",
-      "name": "PlexSwap Token",
+      "name": "PlexSwap Farm Token",
       "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
@@ -29,7 +29,7 @@
       "chainId": 97,
       "decimals": 18,
       "symbol": "WAYA",
-      "name": "PlexSwap Token",
+      "name": "PlexSwap Farm Token",
       "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
@@ -71,7 +71,7 @@
       "chainId": 97,
       "decimals": 18,
       "symbol": "WAYA",
-      "name": "PlexSwap Token",
+      "name": "PlexSwap Farm Token",
       "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
@@ -92,8 +92,8 @@
       "chainId": 97,
       "decimals": 9,
       "symbol": "PLEX-F",
-      "name": "Symplexia Finance",
-      "projectLink": "https://finance.symplexia.com/"
+      "name": "Symplexia Finance Token",
+      "projectLink": "https://plexfinance.us/"
     },
     "quoteToken": {
       "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
@@ -113,8 +113,8 @@
       "chainId": 97,
       "decimals": 9,
       "symbol": "PLEX-F",
-      "name": "Symplexia Finance",
-      "projectLink": "https://finance.symplexia.com/"
+      "name": "Symplexia Finance Token",
+      "projectLink": "https://plexfinance.us/"
     },
     "quoteToken": {
       "address": "0x8516Fc284AEEaa0374E66037BD2309349FF728eA",
