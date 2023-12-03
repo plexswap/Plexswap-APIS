@@ -580,9 +580,9 @@
     ws "^8.2.2"
 
 "@plexswap/farms@*":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@plexswap/farms/-/farms-1.1.6.tgz#fbbe39d8319d4c5487df2f7fc41c5d178c51ef58"
-  integrity sha512-2/GNor81PnMZFNF2StAr+hodQ/IhqdNwEIkbSmKeELGHz2R9WEYOnAEZN4jzkCalsxQoZTbnNz4gsJ+ZTYQM0Q==
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@plexswap/farms/-/farms-1.1.8.tgz#e2fd521f80ad9cc34ab3a02371a1a5c16e4ca50c"
+  integrity sha512-zfYd29gvCwlabl0NJIrU8cfosubmhGwW7BTH0A0X/JAOyD3vb+BIXKXKnUVFwcFmv46m+xISfrKPwspHWZQVxw==
   dependencies:
     "@plexswap/metalists" "*"
     "@plexswap/multicall" "*"
@@ -590,27 +590,27 @@
     "@plexswap/tokens" "*"
     "@plexswap/utils" "*"
 
-"@plexswap/metalists@*", "@plexswap/metalists@^1.1.0":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@plexswap/metalists/-/metalists-1.1.5.tgz#a787e0f8a183a5d5e18630a95f79b588baab90e5"
-  integrity sha512-52NmKlPvX9RlVF9znwtwfV031Xz6Ib3Cjqyh63H946mUWL8CGCqS2R/J9CjyWSmLBXdjTQSZ7+pw4vP7Ol0Ffg==
+"@plexswap/metalists@*":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@plexswap/metalists/-/metalists-1.1.8.tgz#9fb7cb543c55a4b98a81fdb965104f0b478bce50"
+  integrity sha512-8DE3KJQh0cXfylqJEQ3/DnRFMe2LgRreljQTDXCyOBHAhub8NkbcnKMg0dGkhMbTr1NgEj9Zr2JJBHfRGNYz1g==
   dependencies:
     "@plexswap/sdk" "^3.0.0"
     ajv "^6.12.3"
 
 "@plexswap/multicall@*":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@plexswap/multicall/-/multicall-1.1.4.tgz#8bfd3c409a08dabc5b97279e562c6c6f0e6b2371"
-  integrity sha512-B525AABbs/ioCuaLD3jud0e65Jz1AgkJ7ZSm9HK2vYD5P0PeVE8nNozsfKIeqcNPtPmc9UF63Z7HTZf/MrnVKw==
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@plexswap/multicall/-/multicall-1.1.7.tgz#2b85450a34bff576ba2d6a139132cfc1b945da51"
+  integrity sha512-FYdgtgRVwRNY8HDdEO0pGJo6+SU8dR/1Wo4SeqTqDvDyYhgSzFaGhEy+F4MZhQiGnJt0MdtbTqAr8ov/tMQZhg==
   dependencies:
     "@ethersproject/abi" "^5.0.0"
     "@ethersproject/contracts" "^5.0.0"
     "@ethersproject/providers" "^5.0.0"
 
-"@plexswap/sdk@*", "@plexswap/sdk@^3.0.0", "@plexswap/sdk@^3.0.1":
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/@plexswap/sdk/-/sdk-3.1.4.tgz#5d64945d35b61e45b9191020312f1093ca1e0084"
-  integrity sha512-J9oMACCt1Abr68JM1LTHz2LwSIcgX3lgvydiLsFohlmAYUYRme+2mgCd9ct5+mmmoIPflWs3lx61UD1HIZHAtA==
+"@plexswap/sdk@*", "@plexswap/sdk@^3.0.0":
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/@plexswap/sdk/-/sdk-3.1.8.tgz#86f5b850e9b4e1a7f76be7ddddc61d37e241d4f0"
+  integrity sha512-LVLdWbIq/bascJ89PkXkgnJVOv5eBhd1hzvnAixeAi9r3H1WToG4WhrSVYNmjOBiUSnQNfUEuQncow0BHlE24w==
   dependencies:
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
@@ -620,22 +620,22 @@
     toformat "^2.0.0"
 
 "@plexswap/tokens@*":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@plexswap/tokens/-/tokens-1.1.4.tgz#6592cb16f59175c9cc2896c9340db693195b84b2"
-  integrity sha512-Vc0m602Z8sx+wmP1GoWfMuXv4a9fs+9x8Lag/Q6KI4uvf6U7ddIhbVPkLpr4F6tO1eufc4WpWY4+rvqpE8t+yA==
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@plexswap/tokens/-/tokens-1.1.8.tgz#9b4a5b9e7a70587993d5611d74f0fcf10db484b9"
+  integrity sha512-aeWPcqfJYAYCmf3QZs9Uakb+BTcKaTMmISm95vQhB4HwZ6gXQijCp7TFXh0X+aS/sB91RzCItRzuf4GhjkZelQ==
   dependencies:
-    "@plexswap/metalists" "^1.1.0"
-    "@plexswap/sdk" "^3.0.1"
+    "@plexswap/metalists" "*"
+    "@plexswap/sdk" "*"
 
 "@plexswap/tsconfig@*":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@plexswap/tsconfig/-/tsconfig-1.0.2.tgz#a4a0d5f3568fe5f078ebb6e707654c0d7dd00d52"
-  integrity sha512-pocKlwnL90vFtPojGk/EPgLkegixYnCo9tpRzXVleqjA8umah7awOSQRlr3Oqt9LNoWoKEvqtllSl7n+21m0QQ==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@plexswap/tsconfig/-/tsconfig-1.0.7.tgz#621bc9ad469671a554019cc6bf34d3be8cc70689"
+  integrity sha512-7/UkFPhQ6NjLcNoWKaofHTUwaczzxBSFeZuWK/O5JSInX04xM5fOuvyi0jY757xaYbkzGWHUZ6z64bqn2xBPsA==
 
 "@plexswap/utils@*":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@plexswap/utils/-/utils-1.1.3.tgz#eee4e8c18b7721fbd14a9836532b00126e7f6bdd"
-  integrity sha512-pLMZI8DXQ9IaEqNFvBUVNuIaSiyf+2Rv0nkx6QTSYltdZSdypDEXY2f2Pnj86MHLsXOoUEcEQq8v80m+IQ+iKw==
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@plexswap/utils/-/utils-1.1.7.tgz#c1c2f4064e7cc31c7922bd1e048ef1704ec750f8"
+  integrity sha512-cASIo7sDVLQJedJ/i/plvtLch+O8Btkj275eYEpAhOw7jxuw+LZQukHKuoWButOPNtXH2zIrBeWOTpuLE/KSQw==
   dependencies:
     "@plexswap/sdk" "*"
     "@plexswap/tokens" "*"
@@ -662,9 +662,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "20.10.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.1.tgz#d2c96f356c3125fedc983d74c424910c3767141c"
-  integrity sha512-T2qwhjWwGH81vUEx4EXmBKsTJRXFXNZTL4v0gi01+zyBmCwzE6TyHszqX01m+QHTEq+EZNo13NeJIdEqf+Myrg==
+  version "20.10.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.10.2.tgz#32a5e8228357f57714ad28d52229ab04880c2814"
+  integrity sha512-37MXfxkb0vuIlRKHNxwCkb60PNBpR94u4efQuN4JgIAm66zfCDXGSAFCef9XUWFovX2R1ok6Z7MHhtdVXXkkIw==
   dependencies:
     undici-types "~5.26.4"
 

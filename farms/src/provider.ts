@@ -1,4 +1,4 @@
-import { Networkish, StaticJsonRpcProvider } from '@ethersproject/providers'
+import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { ChainId } from '@plexswap/sdk'
 
 export const bscProvider = new StaticJsonRpcProvider(
@@ -6,7 +6,7 @@ export const bscProvider = new StaticJsonRpcProvider(
     url: 'https://bsc-mainnet.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
     skipFetchSetup: true,
   },
-  56,
+  ChainId.BSC,
 )
 
 export const bscTestnetProvider = new StaticJsonRpcProvider(
@@ -14,7 +14,7 @@ export const bscTestnetProvider = new StaticJsonRpcProvider(
     url: 'https://bsc-testnet.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
     skipFetchSetup: true,
   },
-  97,
+  ChainId.BSC_TESTNET,
 )
 
 export const goerliProvider = new StaticJsonRpcProvider(
@@ -22,7 +22,7 @@ export const goerliProvider = new StaticJsonRpcProvider(
     url: 'https://eth-goerli.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
     skipFetchSetup: true,
   },
-  5,
+  ChainId.GOERLI,
 )
 
 export const plexchainProvider = new StaticJsonRpcProvider(
@@ -30,7 +30,7 @@ export const plexchainProvider = new StaticJsonRpcProvider(
     url: 'https://plex-rpc.plexfinance.us',
     skipFetchSetup: true,
   },
-  1149,
+  ChainId.PLEXCHAIN,
 )
 
 export const rpcProvider = {

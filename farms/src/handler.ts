@@ -1,12 +1,13 @@
 import { FixedNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
 import { getFarmWayaRewardApr, SerializedFarmConfig } from '@plexswap/farms'
+import { ChainId, CurrencyAmount, Pair } from '@plexswap/sdk'
 import { BUSD, WAYA, USDP } from '@plexswap/tokens'
 import { farmFetcher } from './helper'
 import { FarmKV, FarmResult } from './kv'
 import { updateLPsAPR } from './lpApr'
 import { rpcProvider } from './provider'
-import { ChainId, CurrencyAmount, Pair } from '@plexswap/sdk'
+
 
 const pairAbi = [
   {
@@ -51,7 +52,7 @@ const wayaPricePairMap = {
     tokenB: BUSD[ChainId.GOERLI],
   },
   [ChainId.PLEXCHAIN]: {
-    address: Pair.getAddress(WAYA[ChainId.GOERLI], USDP[ChainId.PLEXCHAIN]),
+    address: Pair.getAddress(WAYA[ChainId.PLEXCHAIN], USDP[ChainId.PLEXCHAIN]),
     tokenA: WAYA[ChainId.PLEXCHAIN],
     tokenB: USDP[ChainId.PLEXCHAIN],
   },
