@@ -1,11 +1,11 @@
 import { FixedNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
 import { getFarmWayaRewardApr, SerializedFarmConfig } from '@plexswap/farms'
-import { BUSD, WAYA } from '@plexswap/tokens'
+import { BUSD, WAYA, USDP } from '@plexswap/tokens'
 import { farmFetcher } from './helper'
 import { FarmKV, FarmResult } from './kv'
 import { updateLPsAPR } from './lpApr'
-import { bscProvider, bscTestnetProvider } from './provider'
+import { rpcProvider } from './provider'
 import { ChainId, CurrencyAmount, Pair } from '@plexswap/sdk'
 
 const pairAbi = [
@@ -34,7 +34,7 @@ const pairAbi = [
   },
 ]
 
-const wayaBusdPairMap = {
+const wayaPricePairMap = {
   [ChainId.BSC]: {
     address: Pair.getAddress(WAYA[ChainId.BSC], BUSD[ChainId.BSC]),
     tokenA: WAYA[ChainId.BSC],
@@ -45,11 +45,22 @@ const wayaBusdPairMap = {
     tokenA: WAYA[ChainId.BSC_TESTNET],
     tokenB: BUSD[ChainId.BSC_TESTNET],
   },
+  [ChainId.GOERLI]: {
+    address: Pair.getAddress(WAYA[ChainId.GOERLI], BUSD[ChainId.GOERLI]),
+    tokenA: WAYA[ChainId.GOERLI],
+    tokenB: BUSD[ChainId.GOERLI],
+  },
+  [ChainId.PLEXCHAIN]: {
+    address: Pair.getAddress(WAYA[ChainId.GOERLI], USDP[ChainId.PLEXCHAIN]),
+    tokenA: WAYA[ChainId.PLEXCHAIN],
+    tokenB: USDP[ChainId.PLEXCHAIN],
+  },
 }
 
-const getWayaPrice = async (isTestnet: boolean) => {
-  const pairConfig = wayaBusdPairMap[isTestnet ? ChainId.BSC_TESTNET : ChainId.BSC]
-  const pairContract = new Contract(pairConfig.address, pairAbi, isTestnet ? bscTestnetProvider : bscProvider)
+const getWayaPrice = async (chainId: ChainId) => {
+
+  const pairConfig = wayaPricePairMap[chainId]
+  const pairContract = new Contract(pairConfig.address, pairAbi, rpcProvider[chainId])
   const reserves = await pairContract.getReserves()
   const { reserve0, reserve1 } = reserves
   const { tokenA, tokenB } = pairConfig
@@ -88,7 +99,7 @@ export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEv
       farms: farmsConfig.filter((f) => f.pid !== 0).concat(lpPriceHelpers),
     })
 
-    const wayaBusdPrice = await getWayaPrice(isTestnet)
+    const wayaBusdPrice = await getWayaPrice(chainId)
     const lpAprs = await handleLpAprs(chainId)
 
     const finalFarm = farmsWithPrice.map((f) => {

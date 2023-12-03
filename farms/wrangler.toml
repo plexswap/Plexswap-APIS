@@ -1,23 +1,13 @@
-compatibility_date = "2022-09-14"
+compatibility_date = "2023-12-01"
 kv_namespaces = [
-  {binding = "FARMS", id = "e1fa1529e66840f08beda16cf8770c89", preview_id = "73107c111395424c996ff46740388b4c"},
+  {binding = "FARMS", id = "78d321b2cad34d669e54996ee221bbd9", preview_id = "73107c111395424c996ff46740388b4c"},
 ]
 main = "src/index.ts"
-name = "farms-dev"
+name = "farms"
 node_compat = true
 [vars]
 FORCE_UPDATE_KEY = "force"
-KV_CACHE = false
-[triggers]
-crons = []
-
-[env.production]
-kv_namespaces = [
-  {binding = "FARMS", id = "78d321b2cad34d669e54996ee221bbd9"},
-]
-name = "farms"
-node_compat = true
-[env.production.vars]
 KV_CACHE = true
-[env.production.triggers]
-crons = ["0 0 * * *", "*/1 * * * *"]
+[triggers]
+crons = ["0 0 * * *"]
+

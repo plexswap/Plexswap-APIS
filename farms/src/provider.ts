@@ -1,4 +1,5 @@
-import { StaticJsonRpcProvider } from '@ethersproject/providers'
+import { Networkish, StaticJsonRpcProvider } from '@ethersproject/providers'
+import { ChainId } from '@plexswap/sdk'
 
 export const bscProvider = new StaticJsonRpcProvider(
   {
@@ -31,3 +32,10 @@ export const plexchainProvider = new StaticJsonRpcProvider(
   },
   1149,
 )
+
+export const rpcProvider = {
+  [ChainId.GOERLI]        : goerliProvider,
+  [ChainId.BSC]           : bscProvider,
+  [ChainId.BSC_TESTNET]   : bscTestnetProvider,
+  [ChainId.PLEXCHAIN]     : plexchainProvider
+}
