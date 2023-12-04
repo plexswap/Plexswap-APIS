@@ -49,7 +49,7 @@ router.get('/:chainId', async ({ params }, event) => {
       return json(savedFarms)
     } catch (e) {
       console.log(e)
-      return error(500, 'Fetch Farms error')
+      return error(500, `Fetch Farms error - ChainId:${chainId}`)
     }
   }
 

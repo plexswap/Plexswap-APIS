@@ -19,6 +19,7 @@ const multicall = createMulticall(({ chainId }) => {
   }
 })
 
+
 export const farmFetcher = createFarmFetcher(multicall.multicallv2)
 
 export function requireChainId(params: Obj | undefined) {

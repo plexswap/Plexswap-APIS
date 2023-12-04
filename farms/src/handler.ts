@@ -72,7 +72,7 @@ const getWayaPrice = async (chainId: ChainId) => {
     CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
     CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
   )
-
+  
   return pair.priceOf(tokenA)
 }
 
@@ -80,7 +80,6 @@ const farmConfigApi = 'https://plexswap-farms.pages.dev'
 
 export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEvent) {
   try {
-    const isTestnet = farmFetcher.isTestnet(chainId)
     const farmsConfig = await (await fetch(`${farmConfigApi}/${chainId}.json`)).json<SerializedFarmConfig[]>()
     let lpPriceHelpers: SerializedFarmConfig[] = []
     try {
@@ -96,7 +95,6 @@ export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEv
     }
     const { farmsWithPrice, poolLength, regularWayaPerBlock } = await farmFetcher.fetchFarms({
       chainId,
-      isTestnet,
       farms: farmsConfig.filter((f) => f.pid !== 0).concat(lpPriceHelpers),
     })
 
