@@ -579,6 +579,11 @@
     undici "5.20.0"
     ws "^8.2.2"
 
+"@plexswap/chains@*":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@plexswap/chains/-/chains-1.0.3.tgz#a80cf9ed4db0f5dedbd6469625ea02d401a25169"
+  integrity sha512-qeZjPCagqcNONGenE6cpQgQFevL4qEbph+TZBmLYmPNtyNSc5XpuW5KA6ZMiFv4pKEdiBQ2z296xYT2IRZ9/Eg==
+
 "@plexswap/farms@*":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@plexswap/farms/-/farms-1.1.9.tgz#7d385cbc1624369c27fa2dec989116551053a0eb"

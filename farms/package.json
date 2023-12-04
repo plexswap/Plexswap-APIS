@@ -15,6 +15,7 @@
     "@plexswap/multicall": "*",
     "@plexswap/sdk": "*",
     "@plexswap/tokens": "*",
+    "@plexswap/chains": "*",
     "@plexswap/tsconfig": "*",
     "bignumber.js": "^9.0.0",
     "date-fns": "^2.21.3",

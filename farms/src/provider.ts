@@ -1,5 +1,5 @@
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
-import { ChainId } from '@plexswap/sdk'
+import { ChainId } from '@plexswap/chains'
 
 export const bscProvider = new StaticJsonRpcProvider(
   {
