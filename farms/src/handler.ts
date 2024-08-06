@@ -1,14 +1,39 @@
-import { FixedNumber } from '@ethersproject/bignumber'
-import { Contract } from '@ethersproject/contracts'
-import { getFarmWayaRewardApr, SerializedFarmConfig } from '@plexswap/farms'
-import { CurrencyAmount, Pair } from '@plexswap/sdk'
 import { ChainId } from '@plexswap/chains'
+import { FarmWithPrices, SerializedFarmConfig } from '@plexswap/farms'
+import { CurrencyAmount, Pair } from '@plexswap/sdk-core'
 import { BUSD, WAYA, USDP } from '@plexswap/tokens'
+import BN from 'bignumber.js'
+import { formatUnits } from 'viem'
 import { farmFetcher } from './helper'
 import { FarmKV, FarmResult } from './kv'
-import { updateLPsAPR } from './lpApr'
-import { rpcProvider } from './provider'
+import { bscClient, bscTestnetClient, plexchainClient } from './provider'
 
+// copy from src/config, should merge them later
+const BSC_BLOCK_TIME = 3
+const BLOCKS_PER_YEAR = (60 / BSC_BLOCK_TIME) * 60 * 24 * 365 // 10512000
+
+const FIXED_ZERO = new BN(0)
+const FIXED_100 = new BN(100)
+
+export const getFarmWayaRewardApr = (farm: FarmWithPrices, wayaPriceBusd: BN, regularWayaPerBlock: number) => {
+  let wayaRewardsAprAsString = '0'
+  if (!wayaPriceBusd) {
+    return wayaRewardsAprAsString
+  }
+  const totalLiquidity = new BN(farm.lpTotalInQuoteToken).times(new BN(farm.quoteTokenPriceBusd))
+  const poolWeight = new BN(farm.poolWeight)
+  if (totalLiquidity.isZero() || poolWeight.isZero()) {
+    return wayaRewardsAprAsString
+  }
+  const yearlyWayaRewardAllocation = poolWeight
+    ? poolWeight.times(new BN(BLOCKS_PER_YEAR).times(new BN(String(regularWayaPerBlock))))
+    : FIXED_ZERO
+  const wayaRewardsApr = yearlyWayaRewardAllocation.times(wayaPriceBusd).div(totalLiquidity).times(FIXED_100)
+  if (!wayaRewardsApr.isZero()) {
+    wayaRewardsAprAsString = wayaRewardsApr.toFixed(2)
+  }
+  return wayaRewardsAprAsString
+}
 
 const pairAbi = [
   {
@@ -34,9 +59,9 @@ const pairAbi = [
     stateMutability: 'view',
     type: 'function',
   },
-]
+] as const
 
-const wayaPricePairMap = {
+const wayaBusdPairMap = {
   [ChainId.BSC]: {
     address: Pair.getAddress(WAYA[ChainId.BSC], BUSD[ChainId.BSC]),
     tokenA: WAYA[ChainId.BSC],
@@ -60,11 +85,20 @@ const wayaPricePairMap = {
 }
 
 const getWayaPrice = async (chainId: ChainId) => {
+  const pairConfig = wayaBusdPairMap[chainId]
+  const client = {
+    [ChainId.BSC]           : bscClient,
+    [ChainId.BSC_TESTNET]   : bscTestnetClient,
+    [ChainId.PLEXCHAIN]     : plexchainClient,
+    [ChainId.GOERLI]           : bscClient,
+  } 
 
-  const pairConfig = wayaPricePairMap[chainId]
-  const pairContract = new Contract(pairConfig.address, pairAbi, rpcProvider[chainId])
-  const reserves = await pairContract.getReserves()
-  const { reserve0, reserve1 } = reserves
+  const [reserve0, reserve1] = await client[chainId].readContract({
+    abi: pairAbi,
+    address: pairConfig.address,
+    functionName: 'getReserves',
+  })
+
   const { tokenA, tokenB } = pairConfig
 
   const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
@@ -73,7 +107,7 @@ const getWayaPrice = async (chainId: ChainId) => {
     CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
     CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
   )
-  
+
   return pair.priceOf(tokenA)
 }
 
@@ -100,13 +134,11 @@ export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEv
     })
 
     const wayaBusdPrice = await getWayaPrice(chainId)
-    const lpAprs = await handleLpAprs(chainId)
 
     const finalFarm = farmsWithPrice.map((f) => {
       return {
         ...f,
-        lpApr: lpAprs?.[f.lpAddress.toLowerCase()] || 0,
-        wayaApr: getFarmWayaRewardApr(f, FixedNumber.from(wayaBusdPrice.toSignificant(3)), regularWayaPerBlock),
+        wayaApr: getFarmWayaRewardApr(f, new BN(wayaBusdPrice.toSignificant(3)), regularWayaPerBlock),
       }
     }) as FarmResult
 
@@ -126,24 +158,23 @@ export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEv
   }
 }
 
-export async function handleLpAprs(chainId: number) {
-  let lpAprs = await FarmKV.getApr(chainId)
-  if (!lpAprs) {
-    lpAprs = await saveLPsAPR(chainId)
-  }
-  return lpAprs || {}
-}
+const chainlinkAbi = [
+  {
+    inputs: [],
+    name: 'latestAnswer',
+    outputs: [{ internalType: 'int256', name: '', type: 'int256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+] as const
 
-export async function saveLPsAPR(chainId: number) {
-  // TODO: add other chains
-  if (chainId === 56) {
-    const value = await FarmKV.getFarms(chainId)
-    if (value && value.data) {
-      const aprMap = (await updateLPsAPR(chainId, Object.values(value.data))) || null
-      FarmKV.saveApr(chainId, aprMap)
-      return aprMap || null
-    }
-    return null
-  }
-  return null
+export async function fetchWayaPrice() {
+  const address = '0xB6064eD41d4f67e353768aA239cA86f4F73665a1'
+  const latestAnswer = await bscClient.readContract({
+    abi: chainlinkAbi,
+    address,
+    functionName: 'latestAnswer',
+  })
+
+  return formatUnits(latestAnswer, 8)
 }

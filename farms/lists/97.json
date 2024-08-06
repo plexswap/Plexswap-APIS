@@ -93,7 +93,7 @@
       "decimals": 9,
       "symbol": "PLEX-F",
       "name": "Symplexia Finance Token",
-      "projectLink": "https://plexfinance.us/"
+      "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
       "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
@@ -114,7 +114,7 @@
       "decimals": 9,
       "symbol": "PLEX-F",
       "name": "Symplexia Finance Token",
-      "projectLink": "https://plexfinance.us/"
+      "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
       "address": "0x8516Fc284AEEaa0374E66037BD2309349FF728eA",
@@ -124,5 +124,101 @@
       "name": "Binance USD",
       "projectLink": "https://www.paxos.com/busd/"
     }
+  },
+  {
+    "pid": 7,
+    "lpSymbol": "mockUSDT-WBNB LP",
+    "lpAddress": "0x805F7Dd72bc2c4b2f855FD14C30Ef38bdD944f91",
+    "token": {
+      "address": "0x0fB5D7c73FA349A90392f873a4FA1eCf6a3d0a96",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "USDT",
+      "name": "MOCK Token"
+    },
+    "quoteToken": {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "WBNB",
+      "name": "Wrapped BNB",
+      "projectLink": "https://www.binance.org"
+    },
+    "stableSwapAddress": "0xdeCB3301329B21B8C3999480C79Fe23B61d46538",
+    "infoStableSwapAddress": "0x7956c89A966E90DE55A94bEa98dE28c75F4A4C36",
+    "stableLpFee": 0.0002,
+    "stableLpFeeRateOfTotalFee": 0.5
+  },
+  {
+    "pid": 8,
+    "lpSymbol": "mockUSDT-BUSD LP",
+    "lpAddress": "0xEb8e327d7FeE08745542EC0dd4A5f5F553D629dA",
+    "token": {
+      "address": "0x0fB5D7c73FA349A90392f873a4FA1eCf6a3d0a96",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "USDT",
+      "name": "MOCK Token"
+    },
+    "quoteToken": {
+      "address": "0x8516Fc284AEEaa0374E66037BD2309349FF728eA",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "BUSD",
+      "name": "Binance USD",
+      "projectLink": "https://www.paxos.com/busd/"
+    },
+    "stableSwapAddress": "0xDdCC00181ef77A1Ef1c80aF93CE84cF9B4e99609",
+    "infoStableSwapAddress": "0x7956c89A966E90DE55A94bEa98dE28c75F4A4C36",
+    "stableLpFee": 0.0002,
+    "stableLpFeeRateOfTotalFee": 0.5
+  },
+  {
+    "pid": 9,
+    "lpSymbol": "USDT-WBNB LP",
+    "lpAddress": "0xC81Fb08f341C5a4b8894f0B3d3f1A69eBF7d3cf8",
+    "token": {
+      "address": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "USDT",
+      "name": "Tether USD"
+    },
+    "quoteToken": {
+      "address": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "WBNB",
+      "name": "Wrapped BNB",
+      "projectLink": "https://www.binance.org"
+    },
+    "stableSwapAddress": "0x3F81828aE64143038119B6e094aFfEFdf9471a65",
+    "infoStableSwapAddress": "0x7956c89A966E90DE55A94bEa98dE28c75F4A4C36",
+    "stableLpFee": 0.0002,
+    "stableLpFeeRateOfTotalFee": 0.5
+  },
+  {
+    "pid": 10,
+    "lpSymbol": "USDT-BUSD LP",
+    "lpAddress": "0xD66E7914FD99F4F7Cca906C0ac7dbaC010D3b804",
+    "token": {
+      "address": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "USDT",
+      "name": "Tether USD"
+    },
+    "quoteToken": {
+      "address": "0x8516Fc284AEEaa0374E66037BD2309349FF728eA",
+      "chainId": 97,
+      "decimals": 18,
+      "symbol": "BUSD",
+      "name": "Binance USD",
+      "projectLink": "https://www.paxos.com/busd/"
+    },
+    "stableSwapAddress": "0xB71752dBA19593c9478919FAe528ba60E8937a71",
+    "infoStableSwapAddress": "0x7956c89A966E90DE55A94bEa98dE28c75F4A4C36",
+    "stableLpFee": 0.0002,
+    "stableLpFeeRateOfTotalFee": 0.5
   }
 ]

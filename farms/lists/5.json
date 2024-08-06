@@ -93,7 +93,7 @@
       "decimals": 9,
       "symbol": "PLEX-F",
       "name": "Symplexia Finance Token",
-      "projectLink": "https://plexfinance.us/"
+      "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
       "address": "0xb809b9B2dc5e93CB863176Ea2D565425B03c0540",
@@ -114,7 +114,7 @@
       "decimals": 9,
       "symbol": "PLEX-F",
       "name": "Symplexia Finance Token",
-      "projectLink": "https://plexfinance.us/"
+      "projectLink": "https://swap.plexfinance.us/"
     },
     "quoteToken": {
       "address": "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",

@@ -1,41 +1,90 @@
-import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { ChainId } from '@plexswap/chains'
+import { Chain, createPublicClient, http, PublicClient, defineChain } from 'viem'
+import { bsc, bscTestnet } from 'viem/chains'
 
-export const bscProvider = new StaticJsonRpcProvider(
-  {
-    url: 'https://bsc-mainnet.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
-    skipFetchSetup: true,
+const requireCheck = [
+  BSC_NODE,
+  BSC_TESTNET_NODE,
+  PLEXCHAIN_NODE
+]
+
+export const plexchain = /*#__PURE__*/ defineChain({
+  id: 1149,
+  name: 'Symplexia Smart Chain',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Plex Native Token',
+    symbol: 'PLEX',
   },
-  ChainId.BSC,
-)
-
-export const bscTestnetProvider = new StaticJsonRpcProvider(
-  {
-    url: 'https://bsc-testnet.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
-    skipFetchSetup: true,
+  rpcUrls: {
+    default: { http: ["https://plex-rpc.plexfinance.us"] },
   },
-  ChainId.BSC_TESTNET,
-)
-
-export const goerliProvider = new StaticJsonRpcProvider(
-  {
-    url: 'https://eth-goerli.nodereal.io/v1/e44eb77ea3f94d11b77ef27be519e58d',
-    skipFetchSetup: true,
+  blockExplorers: {
+    default: {
+      name: 'Plexchain Explorer',
+      url: 'https://explorer.plexfinance.us',
+    },
   },
-  ChainId.GOERLI,
-)
-
-export const plexchainProvider = new StaticJsonRpcProvider(
-  {
-    url: 'https://plex-rpc.plexfinance.us',
-    skipFetchSetup: true,
+  contracts: {
+    multicall3: {
+      address: '0x2210e34629E5B17B5F2D875a76098223d71F1D3E',
+      blockCreated: 455863,
+    },
   },
-  ChainId.PLEXCHAIN,
-)
+})
 
-export const rpcProvider = {
-  [ChainId.GOERLI]        : goerliProvider,
-  [ChainId.BSC]           : bscProvider,
-  [ChainId.BSC_TESTNET]   : bscTestnetProvider,
-  [ChainId.PLEXCHAIN]     : plexchainProvider
+
+requireCheck.forEach((node) => {
+  if (!node) {
+    throw new Error('Missing env var')
+  }
+})
+
+export const bscClient: PublicClient = createPublicClient({
+  chain: bsc,
+  transport: http(BSC_NODE),
+  batch: {
+    multicall: {
+      batchSize: 1024 * 200,
+      wait: 16,
+    },
+  },
+  pollingInterval: 6_000,
+})
+
+export const bscTestnetClient: PublicClient = createPublicClient({
+  chain: bscTestnet,
+  transport: http(BSC_TESTNET_NODE),
+  batch: {
+    multicall: {
+      batchSize: 1024 * 200,
+      wait: 16,
+    },
+  },
+  pollingInterval: 6_000,
+})
+
+export const plexchainClient: PublicClient = createPublicClient({
+  chain: plexchain,
+  transport: http(PLEXCHAIN_NODE),
+  batch: {
+    multicall: {
+      batchSize: 1024 * 200,
+      wait: 16,
+    },
+  },
+  pollingInterval: 6_000,
+})
+
+export const viemProviders = ({ chainId }: { chainId?: ChainId }): PublicClient => {
+  switch (chainId) {
+    case ChainId.BSC:
+      return bscClient
+    case ChainId.BSC_TESTNET:
+      return bscTestnetClient
+    case ChainId.PLEXCHAIN:
+      return plexchainClient
+    default:
+      return bscClient
+  }
 }

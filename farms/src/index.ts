@@ -10,26 +10,43 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { CORS_ALLOW, handleCors, wrapCorsHeader } from '@plexswap/worker-utils'
+import BigNumber from 'bignumber.js'
 import { Router } from 'itty-router'
 import { error, json, missing } from 'itty-router-extras'
-import { saveFarms, saveLPsAPR } from './handler'
-import { farmFetcher, handleCors, requireChainId, wrapCorsHeader } from './helper'
+import { fetchWayaPrice, saveFarms } from './handler'
+import { requireChainId } from './helper'
 import { FarmKV } from './kv'
+import { handler as extendedHandler } from './extended'
+
+BigNumber.config({
+  EXPONENTIAL_AT: 1000,
+  DECIMAL_PLACES: 18,
+})
 
 const router = Router()
 
-const allowedOrigin = /[^\w](plexswap\.run)|(localhost:3000)|(swap.plexfinance.us)/
+router.get('/price/waya', async (_, event) => {
+  const cache = caches.default
+  const cacheResponse = await cache.match(event.request)
+  let response
+  if (!cacheResponse) {
+    const price = await fetchWayaPrice()
+    response = json(
+      { price, updatedAt: new Date().toISOString() },
+      {
+        headers: {
+          'Cache-Control': 'public, max-age=10, s-maxage=10',
+        },
+      },
+    )
 
-router.get('/apr', async ({ query }) => {
-  if (typeof query?.key === 'string' && query.key === FORCE_UPDATE_KEY) {
-    try {
-      const result = await Promise.allSettled(farmFetcher.supportedChainId.map((id) => saveLPsAPR(id)))
-      return json(result.map((r) => r))
-    } catch (err) {
-      error(500, { err })
-    }
+    event.waitUntil(cache.put(event.request, response.clone()))
+  } else {
+    response = new Response(cacheResponse.body, cacheResponse)
   }
-  return error(400, 'no key provided')
+
+  return response
 })
 
 router.get('/:chainId', async ({ params }, event) => {
@@ -46,45 +63,34 @@ router.get('/:chainId', async ({ params }, event) => {
     try {
       const savedFarms = await saveFarms(+chainId, event)
 
-      return json(savedFarms)
+      return json(savedFarms, {
+        headers: {
+          'Cache-Control': 'public, max-age=60, s-maxage=60',
+        },
+      })
     } catch (e) {
       console.log(e)
-      return error(500, `Fetch Farms error - ChainId:${chainId}`)
+      return error(500, 'Fetch Farms error')
     }
   }
 
-  return json(cached)
+  return json(cached, {
+    headers: {
+      'Cache-Control': 'public, max-age=60, s-maxage=60',
+    },
+  })
 })
+
+router.get('/extended/:chainId/liquidity/:address', extendedHandler)
 
 router.all('*', () => missing('Not found'))
 
-router.options('*', handleCors(allowedOrigin))
+router.options('*', handleCors(CORS_ALLOW, `GET, HEAD, OPTIONS`, `referer, origin, content-type`))
 
 addEventListener('fetch', (event) =>
   event.respondWith(
-    router.handle(event.request, event).then((res) => wrapCorsHeader(event.request, res, { allowedOrigin })),
+    router
+      .handle(event.request, event)
+      .then((res) => wrapCorsHeader(event.request, res, { allowedOrigin: CORS_ALLOW })),
   ),
 )
-
-addEventListener('scheduled', (event) => {
-  event.waitUntil(handleScheduled(event))
-})
-
-// eslint-disable-next-line consistent-return
-async function handleScheduled(event: ScheduledEvent) {
-  switch (event.cron) {
-    case '*/1 * * * *':
-    case '*/2 * * * *': {
-      const result = await Promise.allSettled(farmFetcher.supportedChainId.map((id) => saveFarms(id, event)))
-      console.log(result.map((r) => r))
-      return result
-    }
-    case '0 0 * * *': {
-      const result = await Promise.allSettled(farmFetcher.supportedChainId.map((id) => saveLPsAPR(id)))
-      console.log(result.map((r) => r))
-      return result
-    }
-    default:
-      break
-  }
-}
