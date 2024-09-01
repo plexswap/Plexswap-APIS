@@ -1,12 +1,12 @@
 import { ChainId } from '@plexswap/chains'
 import { FarmWithPrices, SerializedFarmConfig } from '@plexswap/farms'
 import { CurrencyAmount, Pair } from '@plexswap/sdk-core'
-import { BUSD, WAYA, USDP } from '@plexswap/tokens'
+import { BUSD, WAYA } from '@plexswap/tokens'
 import BN from 'bignumber.js'
 import { formatUnits } from 'viem'
 import { farmFetcher } from './helper'
 import { FarmKV, FarmResult } from './kv'
-import { bscClient, bscTestnetClient, plexchainClient } from './provider'
+import { bscClient, bscTestnetClient } from './provider'
 
 // copy from src/config, should merge them later
 const BSC_BLOCK_TIME = 3
@@ -72,28 +72,12 @@ const wayaBusdPairMap = {
     tokenA: WAYA[ChainId.BSC_TESTNET],
     tokenB: BUSD[ChainId.BSC_TESTNET],
   },
-  [ChainId.GOERLI]: {
-    address: Pair.getAddress(WAYA[ChainId.GOERLI], BUSD[ChainId.GOERLI]),
-    tokenA: WAYA[ChainId.GOERLI],
-    tokenB: BUSD[ChainId.GOERLI],
-  },
-  [ChainId.PLEXCHAIN]: {
-    address: Pair.getAddress(WAYA[ChainId.PLEXCHAIN], USDP[ChainId.PLEXCHAIN]),
-    tokenA: WAYA[ChainId.PLEXCHAIN],
-    tokenB: USDP[ChainId.PLEXCHAIN],
-  },
 }
 
-const getWayaPrice = async (chainId: ChainId) => {
-  const pairConfig = wayaBusdPairMap[chainId]
-  const client = {
-    [ChainId.BSC]           : bscClient,
-    [ChainId.BSC_TESTNET]   : bscTestnetClient,
-    [ChainId.PLEXCHAIN]     : plexchainClient,
-    [ChainId.GOERLI]           : bscClient,
-  } 
-
-  const [reserve0, reserve1] = await client[chainId].readContract({
+const getWayaPrice = async (isTestnet: boolean) => {
+  const pairConfig = wayaBusdPairMap[isTestnet ? ChainId.BSC_TESTNET : ChainId.BSC]
+  const client = isTestnet ? bscTestnetClient : bscClient
+  const [reserve0, reserve1] = await client.readContract({
     abi: pairAbi,
     address: pairConfig.address,
     functionName: 'getReserves',
@@ -115,6 +99,7 @@ const farmConfigApi = 'https://plexswap-farms.pages.dev'
 
 export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEvent) {
   try {
+    const isTestnet = farmFetcher.isTestnet(chainId)
     const farmsConfig = await (await fetch(`${farmConfigApi}/${chainId}.json`)).json<SerializedFarmConfig[]>()
     let lpPriceHelpers: SerializedFarmConfig[] = []
     try {
@@ -130,10 +115,11 @@ export async function saveFarms(chainId: number, event: ScheduledEvent | FetchEv
     }
     const { farmsWithPrice, poolLength, regularWayaPerBlock } = await farmFetcher.fetchFarms({
       chainId,
+      isTestnet,
       farms: farmsConfig.filter((f) => f.pid !== 0).concat(lpPriceHelpers),
     })
 
-    const wayaBusdPrice = await getWayaPrice(chainId)
+    const wayaBusdPrice = await getWayaPrice(isTestnet)
 
     const finalFarm = farmsWithPrice.map((f) => {
       return {

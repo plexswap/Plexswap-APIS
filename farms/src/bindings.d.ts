@@ -7,4 +7,6 @@ declare global {
   const PLEXCHAIN_NODE: string
   const BSC_NODE: string
   const BSC_TESTNET_NODE: string
+  const EXPLORER_URL: string
+  const EXPLORER_API_KEY: string
 }
